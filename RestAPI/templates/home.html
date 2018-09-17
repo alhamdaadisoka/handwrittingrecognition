@@ -1,0 +1,89 @@
+{% extends "header.html" %}
+{% block konten %}
+
+    <div style="display: none;" class="se-pre-con"></div>
+
+      <div class="container">
+
+      	<!-- <div style="margin:120px auto; text-align: center; margin-bottom: 50px;">
+  	        <p style="font-size: 88px; font-weight: bold;"><img src="/static/kacapembesar.png" style="height: 200px;"> Handwritten</p>
+  	        <p style="margin-top: -80px; font-size: 25px;"><b>Recognizer</b> using <b>Keras</b>
+  	    </div> -->
+
+        <center>
+          <div style="margin: 0px auto; margin-bottom: -25px;">
+            <img src="/static/logo.gif" / />
+          </div>
+        </center>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+          <div class="alert alert-danger" style="margin-bottom: -10px;">
+            {% for message in messages %}
+              {{ message }}
+            {% endfor %}
+          </div>
+          {% endif %}
+        {% endwith %}
+
+    	  <form action="/uploader" method="POST" enctype = "multipart/form-data">
+            <div class="form-group">
+              <input type="file" name="file" id="file" style="visibility: hidden;"/>
+    			       <div class="input-group input-group-hg input-group-rounded">
+            			  <input readonly="true" id="gambar" type="text" name="gambar" class="form-control" placeholder="Click for upload image" id="search-query-2" style="background: white !important; opacity: 100; border: 2px solid #bdc3c7 !important;" required>
+            			  <span class="input-group-btn">
+            			    <button id="klik" type="submit" class="btn"><span class="fui-search"></span></button>
+            			  </span>
+    			       </div>
+    		  </div>
+    		</form>
+
+      </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/static/assets/jquery-3.3.1.min.js"></script>
+
+    <!-- Bootstrap 4 requires Popper.js -->
+    <script src="/static/assets/popper.min.js"></script>
+    <script src="/static/assets/dist/scripts/flat-ui.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function(event){
+
+            $("#klik").click(function() {
+                var url=$('input:text[name=url]').val();
+
+                if (url.length >= 10) {
+                    $(".se-pre-con").show();
+                }
+
+            });
+
+            $('#gambar').click(function()
+            {
+              $("#file").click();
+            });
+
+            $('#file').change(function(evt) {
+
+                var fullPath = $(this).val();
+                if (fullPath) {
+                    var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+                    var filename = fullPath.substring(startIndex);
+                    if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                        filename = filename.substring(1);
+                    }
+                    $("#gambar").val(filename);
+                }else {
+                  $("#gambar").val("");
+                }
+            });
+
+        });
+
+    </script>
+  </body>
+</html>
+
+{% endblock %}

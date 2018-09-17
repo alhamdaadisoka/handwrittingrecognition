@@ -1,0 +1,34 @@
+{% extends "header.html" %}
+{% block konten %}
+
+<div class="container" style="margin-bottom: 30px;">
+
+    <div class="row">
+      <div class="col-lg-5">
+        <div class="card bg-light">
+          <div class="card-header">
+            Image
+          </div>
+          <div class="card-body" style="background: #fff;">
+              <img src="/static/file/{{ filename }}" />
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="card bg-light">
+          <div class="card-header">
+            Result
+          </div>
+          <div class="card-body" style="background: #fff;">
+            <p>
+            {% autoescape false %}
+        		{{ hasil }}
+        	{% endautoescape %}
+        	</p>
+          </div>
+        </div>
+        <a href="/" class="btn btn-primary btn-flat btn-block" style="margin-top: 15px; ">Back to Home</a>
+      </div>
+
+</div>
+{% endblock %}
